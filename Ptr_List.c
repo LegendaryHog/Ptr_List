@@ -12,14 +12,12 @@ Node* List_Ctor (void)
 int List_Dtor (Node* ficnode)
 {
     Node* node = ficnode->next;
-    while (node != NULL)
+    while (node != ficnode)
     {
         node = node->next;
-        node->prev->next = NULL;
-        node->prev->prev = NULL;
-        node->prev->data = 0;
-        free (node->prev);
+        Node_Delete (node->prev);
     }
+    free (ficnode);
     return NO_ERR;
 }
 
